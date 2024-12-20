@@ -5,12 +5,14 @@ import 'voice_translator_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
+  /*try {
     await Firebase.initializeApp();
   } catch (e) {
     print("Error initializing Firebase: $e");
     return;
   }
+
+   */
   runApp(const MyApp());
 }
 
