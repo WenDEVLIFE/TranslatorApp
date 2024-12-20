@@ -1,0 +1,11 @@
+connectorId: default
+generate:
+  dartSdk:
+    outputDir: dataconnect-generated\dart\default_connector
+    package: default_connector
+  kotlinSdk:
+    outputDir: dataconnect-generated\kotlin
+    package: connectors.default
+  swiftSdk:
+    outputDir: dataconnect-generated\swift
+    package: DefaultConnector

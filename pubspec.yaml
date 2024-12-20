@@ -1,0 +1,41 @@
+name: mandtrans_app
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: any
+  firebase_auth: any
+  cloud_firestore: any
+  http: ^1.2.2
+  firebase_data_connect: ^0.1.2+1
+
+  #mongo_dart: ^0.10.3
+  #http: ^1.2.2  # Use the latest compatible version
+ 
+ 
+
+  #dependencies:
+  #firebase_data_connect: <version>
+
+  
+  
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
