@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 4, 2, 95)),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => const MyHomePage(title: 'Mandaya Translator'),
