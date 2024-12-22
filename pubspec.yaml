@@ -15,6 +15,8 @@ dependencies:
   cloud_firestore: any
   http: ^1.2.2
   firebase_data_connect: ^0.1.2+1
+  speech_to_text: any
+  permission_handler: ^10.2.0
 
   #mongo_dart: ^0.10.3
   #http: ^1.2.2  # Use the latest compatible version

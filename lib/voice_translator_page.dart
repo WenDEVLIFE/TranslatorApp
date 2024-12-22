@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:permission_handler/permission_handler.dart';
+import 'component/Translator.dart';
 
 class VoiceTranslatorPage extends StatefulWidget {
   const VoiceTranslatorPage({super.key});
@@ -9,14 +11,60 @@ class VoiceTranslatorPage extends StatefulWidget {
 }
 
 class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
-  String _translatedText = ''; // Placeholder for translated text
-  String _selectedLanguage = 'English to Mandaya'; // Default language option
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+  String _text = '';
+  String _translatedText = '';
+  String _selectedLanguage = 'English to Mandaya';
+  final Translator _translator = Translator();
 
-  // Function to handle voice translation (placeholder)
-  void _startVoiceTranslation() {
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+  }
+
+  Future<void> _startListening() async {
+    if (await Permission.microphone.request().isGranted) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => setState(() => _isListening = val == 'listening'),
+        onError: (val) => setState(() => _isListening = false),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(() {
+            _text = val.recognizedWords;
+          }),
+        );
+      }
+    } else {
+      setState(() {
+        _isListening = false;
+        _translatedText = 'Microphone permission denied';
+      });
+    }
+  }
+
+  void _stopListening() {
+    _speech.stop();
+    setState(() => _isListening = false);
+  }
+
+  Future<void> _translateVoice() async {
+    if (_text.isEmpty) {
+      setState(() {
+        _translatedText = 'No voice input detected.';
+      });
+      return;
+    }
+
+    String sourceLanguage = _selectedLanguage == 'English to Mandaya' ? 'English' : 'Mandaya';
+    String targetLanguage = _selectedLanguage == 'English to Mandaya' ? 'Mandaya' : 'English';
+
+    String translated = await _translator.translateText(_text, sourceLanguage, targetLanguage);
     setState(() {
-      // Simulate a translation result for demonstration
-      _translatedText = 'Translated voice text goes here!';
+      _translatedText = translated;
     });
   }
 
@@ -24,17 +72,15 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // This removes the back arrow
+        automaticallyImplyLeading: false,
         title: const Text(
           'Voice Translator',
-          style:
-              TextStyle(color: Colors.white), // Clear and visible title color
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Brighter blue
+        backgroundColor: const Color.fromARGB(255, 0, 64, 255),
       ),
       body: Container(
-        color:
-            const Color.fromARGB(255, 245, 245, 245), // Light gray background
+        color: const Color.fromARGB(255, 245, 245, 245),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -45,7 +91,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87, // Professional dark color
+                  color: Colors.black87,
                 ),
               ),
               const SizedBox(height: 10),
@@ -82,15 +128,43 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: _startVoiceTranslation,
-                icon: const Icon(Icons.mic), // Voice icon
-                label: const Text('Translate Voice'),
+                onPressed: _isListening ? _stopListening : _startListening,
+                icon: Icon(_isListening ? Icons.mic_off : Icons.mic),
+                label: Text(_isListening ? 'Stop Listening' : 'Start Listening'),
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
                   backgroundColor: const Color.fromARGB(255, 0, 64, 255),
-                  foregroundColor: Colors.white, // White text for clarity
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Listening: $_isListening',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: _translateVoice,
+                icon: const Icon(Icons.translate),
+                label: const Text('Translate Voice'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18),
+                  backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -117,9 +191,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
                   color: const Color.fromARGB(255, 230, 230, 230),
                 ),
                 child: Text(
-                  _translatedText.isEmpty
-                      ? 'No translation yet.'
-                      : _translatedText,
+                  _translatedText.isEmpty ? 'No translation yet.' : _translatedText,
                   style: const TextStyle(fontSize: 16, color: Colors.black87),
                   textAlign: TextAlign.center,
                 ),
@@ -151,8 +223,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
           if (index == 0) {
             Navigator.pushNamed(context, '/'); // Navigate to Home
           } else if (index == 1) {
-            Navigator.pushNamed(
-                context, '/textTranslator'); // Navigate to Text Translator
+            Navigator.pushNamed(context, '/textTranslator'); // Navigate to Text Translator
           } else if (index == 2) {
             Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
           }
