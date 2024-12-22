@@ -37,6 +37,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _translator.getTranslations();
    InitSQLite().printTranslations();
     InitSQLite().printReverseTranslations();
   }

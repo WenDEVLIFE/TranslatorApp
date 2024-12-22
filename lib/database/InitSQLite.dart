@@ -68,4 +68,16 @@ class InitSQLite {
       print('Key: ${map['key']}, Value: ${map['value']}');
     });
   }
+
+  Future<Map<String, String>> getTranslationsFromSQLite() async {
+    final Database db = await initializeDatabase();
+    final List<Map<String, dynamic>> maps = await db.query('translations');
+    return { for (var e in maps) e['key'] : e['value'] };
+  }
+
+  Future<Map<String, String>> getReverseTranslationsFromSQLite() async {
+    final Database db = await initializeDatabase();
+    final List<Map<String, dynamic>> maps = await db.query('reverseTranslations');
+    return { for (var e in maps) e['key'] : e['value'] };
+  }
 }
