@@ -35,6 +35,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
         _speech.listen(
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
+            print('Recognized words: $_text'); // Debugging statement
           }),
         );
       }
@@ -57,12 +58,17 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
         _translatedText = 'No voice input detected.';
       });
       return;
+    } else {
+      setState(() {
+        _translatedText = 'Translating...';
+      });
     }
 
     String sourceLanguage = _selectedLanguage == 'English to Mandaya' ? 'English' : 'Mandaya';
     String targetLanguage = _selectedLanguage == 'English to Mandaya' ? 'Mandaya' : 'English';
 
-    String translated = await _translator.translateText(_text, sourceLanguage, targetLanguage);
+    // Convert the recognized words to lowercase
+    String translated = await _translator.translateText(_text.toLowerCase(), sourceLanguage, targetLanguage);
     setState(() {
       _translatedText = translated;
     });

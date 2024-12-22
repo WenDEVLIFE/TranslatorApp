@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Translator {
+
+  // Madaya to english translations
   final Map<String, String> _translations = {
     'hello': 'kamusta',
     'goodbye': 'paalam',
@@ -95,6 +97,7 @@ class Translator {
     'many students at this university excel academically.': 'isa isab ngini na unibersidad na yaga prudos ng mga adaig na achiever.'
   };
 
+  // English to Mandaya translations
   final Map<String, String> _reverseTranslations = {
     'kamusta': 'hello',
     'paalam': 'goodbye',
