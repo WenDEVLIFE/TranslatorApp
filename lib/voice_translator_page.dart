@@ -224,6 +224,10 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             icon: Icon(Icons.mic),
             label: 'Voice',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.language),
+            label: 'Language',
+          ),
         ],
         onTap: (int index) {
           if (index == 0) {
@@ -232,6 +236,9 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             Navigator.pushNamed(context, '/textTranslator'); // Navigate to Text Translator
           } else if (index == 2) {
             Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
+          }
+          else if (index == 3) {
+
           }
         },
       ),

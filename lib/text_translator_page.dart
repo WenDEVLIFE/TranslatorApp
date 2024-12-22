@@ -17,6 +17,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   final Translator _translator = Translator();
 
   Future<void> _translateText() async {
+   // _translator.insertTranslationsToFirestore();
     String translated = await _translator.translateText(
       _textController.text,
       _sourceLanguage,
@@ -161,6 +162,9 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 245, 245, 245),
+        selectedItemColor: const Color.fromARGB(255, 0, 64, 255),
+        unselectedItemColor: Colors.black87,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -172,6 +176,8 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
             // Stay on the text translator page
           } else if (index == 2) {
             Navigator.pushNamed(context, '/voiceTranslator'); // Navigate to Voice Translator
+          } else if (index == 3) {
+
           }
         },
         items: const [
@@ -186,6 +192,10 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.mic),
             label: 'Voice',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.language),
+            label: 'Language',
           ),
         ],
       ),

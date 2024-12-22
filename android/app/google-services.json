@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "883441268467",
-    "project_id": "mandtrans-app",
-    "storage_bucket": "mandtrans-app.firebasestorage.app"
+    "project_number": "49243635699",
+    "project_id": "mandtransapp",
+    "storage_bucket": "mandtransapp.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883441268467:android:81a8d2786b8b0c288ae986",
+        "mobilesdk_app_id": "1:49243635699:android:df6cedc02cc9c799b79c86",
         "android_client_info": {
           "package_name": "com.example.mandtrans_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDOaQ1heA0MCNXUdunH4BdMnbXPoNTKcaQ"
+          "current_key": "AIzaSyALoQV2gPP-mYfksGP1uMmC9N4dRUTPbXg"
         }
       ],
       "services": {

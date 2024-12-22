@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'database/Firebase.dart';
 import 'text_translator_page.dart';
 import 'voice_translator_page.dart';
 
@@ -13,6 +14,7 @@ Future<void> main() async {
   }
 
    */
+  await FirebaseInstance.run();
   runApp(const MyApp());
 }
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -354,29 +355,20 @@ class Translator {
     } else {
       return 'Unsupported translation';
     }
+
+
   }
-  Future<void> _saveTranslation(String sourceText, String translatedText, String sourceLanguage, String targetLanguage) async {
-    final url = Uri.parse('http://localhost:27017/MobileTransApp'); // Adjust to your server URL if needed
-
+  Future<void> insertTranslationsToFirestore() async {
     try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'sourceText': sourceText,
-          'translatedText': translatedText,
-          'sourceLanguage': sourceLanguage,
-          'targetLanguage': targetLanguage,
-        }),
-      );
+      // Insert _translations
+      await FirebaseFirestore.instance.collection('EnglishCollection').doc().set(_translations);
 
-      if (response.statusCode == 200) {
-        print('Translation saved successfully!');
-      } else {
-        print('Failed to save translation: ${response.statusCode}');
-      }
+      // Insert _reverseTranslations
+      await FirebaseFirestore.instance.collection('MandayaCollection').doc().set(_reverseTranslations);
+
+      print('Translations inserted successfully!');
     } catch (error) {
-      print('Error: $error');
+      print('Error inserting translations: $error');
     }
   }
 }
