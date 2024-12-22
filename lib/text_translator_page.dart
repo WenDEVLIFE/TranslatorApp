@@ -18,8 +18,6 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   final Translator _translator = Translator();
 
   Future<void> _translateText() async {
-    Translator translator = Translator();
-    await translator.insertTranslationsToFirestore();
     String translated = await _translator.translateText(
       _textController.text,
       _sourceLanguage,
@@ -37,7 +35,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _translator.getTranslations();
+    _translator.RetrieveFromFirebase();
    InitSQLite().printTranslations();
     InitSQLite().printReverseTranslations();
   }
@@ -188,6 +186,8 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           } else if (index == 2) {
             Navigator.pushNamed(context, '/voiceTranslator'); // Navigate to Voice Translator
           } else if (index == 3) {
+            // Stay on the admin page
+            Navigator.pushNamed(context, '/admin');
 
           }
         },
@@ -204,10 +204,13 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
             icon: Icon(Icons.mic),
             label: 'Voice',
           ),
-          BottomNavigationBarItem(
+          /*
+      BottomNavigationBarItem(
             icon: Icon(Icons.language),
             label: 'Language',
           ),
+
+           */
         ],
       ),
     );

@@ -224,10 +224,14 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             icon: Icon(Icons.mic),
             label: 'Voice',
           ),
-          BottomNavigationBarItem(
+          /*
+      BottomNavigationBarItem(
             icon: Icon(Icons.language),
             label: 'Language',
           ),
+
+           */
+
         ],
         onTap: (int index) {
           if (index == 0) {
@@ -238,7 +242,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
           }
           else if (index == 3) {
-
+            Navigator.pushNamed(context, '/admin');
           }
         },
       ),

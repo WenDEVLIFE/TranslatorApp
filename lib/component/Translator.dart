@@ -44,7 +44,17 @@ class Translator {
 
 
   }
-  Future<void> insertTranslationsToFirestore() async {
+
+  Future <void> RetrieveFromFirebase () async{
+
+    Map<String, String> translations = await getTranslations1();
+    Map<String, String> reverseTranslations = await getTranslations2();
+
+    print('Translations: $translations');
+    print('Reverse Translations: $reverseTranslations');
+    insertToSQLite(translations, reverseTranslations);
+  }
+  Future<void> insertToSQLite(Map<String, String> translations, Map<String, String> reverseTranslations) async {
     try {
       // Insert _translations
       //await FirebaseFirestore.instance.collection('EnglishCollection').doc().set(_translations);
@@ -53,8 +63,8 @@ class Translator {
       //await FirebaseFirestore.instance.collection('MandayaCollection').doc().set(_reverseTranslations);
 
       // Store translations in SQLite
-      await InitSQLite().storeTranslationsInSQLite(_translations);
-      await InitSQLite().storeReverseTranslationsInSQLite(_reverseTranslations);
+      await InitSQLite().storeTranslationsInSQLite(translations);
+      await InitSQLite().storeReverseTranslationsInSQLite(reverseTranslations);
 
       print('Translations inserted successfully!');
     } catch (error) {
@@ -62,13 +72,31 @@ class Translator {
     }
   }
 
-  Future<Map<String, String>> getTranslations() async {
+  Future<Map<String, String>> getTranslations1() async {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     try {
       DocumentSnapshot snapshot = await _firestore.collection("EnglishCollection").doc('dljOVeQs8xdpcybZuQxo').get();
       if (snapshot.exists) {
         Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
         print('Translations found');
+        return data.map((key, value) => MapEntry(key, value.toString()));
+      } else {
+        print('No translations found');
+        return {};
+      }
+    } catch (e) {
+      print('Error retrieving translations: $e');
+      return {};
+    }
+  }
+
+  Future<Map<String, String>> getTranslations2() async {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    try {
+      DocumentSnapshot snapshot = await _firestore.collection("MandayaCollection").doc('57UXvyBqAGiNR6Z6yVY8').get();
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+        print('Reverse Translations found');
         return data.map((key, value) => MapEntry(key, value.toString()));
       } else {
         print('No translations found');
