@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 import 'component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {
@@ -59,71 +57,41 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
 
             // Dropdown for Source Language
             const Text(
-              'From:',
+              'Select Translation Language:',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: DropdownButton<String>(
-                value: _sourceLanguage,
-                isExpanded: true,
-                underline: Container(),
-                items: <String>['English', 'Mandaya'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _sourceLanguage = newValue!;
-                  });
-                },
-              ),
+            const SizedBox(height: 10),
+            DropdownButton<String>(
+              value: 'English to Mandaya',
+              items: <String>[
+                'English to Mandaya',
+                'Mandaya to English',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  if (newValue == 'English to Mandaya') {
+                    _sourceLanguage = 'English';
+                    _targetLanguage = 'Mandaya';
+                  } else {
+                    _sourceLanguage = 'Mandaya';
+                    _targetLanguage = 'English';
+                  }
+                });
+              },
+              dropdownColor: Colors.white,
+              iconEnabledColor: Colors.black,
             ),
-            const SizedBox(height: 20),
-
-            // Dropdown for Target Language
-            const Text(
-              'To:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: DropdownButton<String>(
-                value: _targetLanguage,
-                isExpanded: true,
-                underline: Container(),
-                items: <String>['English', 'Mandaya'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _targetLanguage = newValue!;
-                  });
-                },
-              ),
-            ),
-            const SizedBox(height: 20), // Reduced space here
 
             // Text input for translation
             const Text(
