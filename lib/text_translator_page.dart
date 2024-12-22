@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; // Import http package
-import 'dart:convert'; // Import for json encoding
+import 'component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {
   const TextTranslatorPage({super.key});
@@ -14,72 +13,18 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   String _targetLanguage = 'Mandaya';
   final TextEditingController _textController = TextEditingController();
   String _translatedText = '';
+  final Translator _translator = Translator();
 
-  // Manual translation mappings
-  final Map<String, String> _translations = {
-    'hello': 'kamusta',
-    'goodbye': 'paalam',
-    'thank you': 'salamat',
-    'lets eat': 'mokaan da kita',
-  };
-
-  final Map<String, String> _reverseTranslations = {
-    'kamusta': 'hello',
-    'paalam': 'goodbye',
-    'salamat': 'thank you',
-    'mokaan da kita': 'lets eat',
-  };
-
-  // Simulate translation logic
   Future<void> _translateText() async {
-    String translated = '';
-
-    if (_sourceLanguage == 'English' && _targetLanguage == 'Mandaya') {
-      translated = _translations[_textController.text.toLowerCase()] ??
-          'Translation not found';
-    } else if (_sourceLanguage == 'Mandaya' && _targetLanguage == 'English') {
-      translated = _reverseTranslations[_textController.text.toLowerCase()] ??
-          'Translation not found';
-    } else {
-      translated = 'Same language selected. No translation needed.';
-    }
+    String translated = await _translator.translateText(
+      _textController.text,
+      _sourceLanguage,
+      _targetLanguage,
+    );
 
     setState(() {
       _translatedText = translated;
     });
-
-    // Save the translation to MongoDB
-    if (_translatedText != 'Translation not found') {
-      await _saveTranslation(
-          _textController.text, translated, _sourceLanguage, _targetLanguage);
-    }
-  }
-
-  Future<void> _saveTranslation(String sourceText, String translatedText,
-      String sourceLanguage, String targetLanguage) async {
-    final url = Uri.parse(
-        'http://localhost:27017/MobileTransApp'); // Adjust to your server URL if needed
-
-    try {
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'sourceText': sourceText,
-          'translatedText': translatedText,
-          'sourceLanguage': sourceLanguage,
-          'targetLanguage': targetLanguage,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        print('Translation saved successfully!');
-      } else {
-        print('Failed to save translation: ${response.statusCode}');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
   }
 
   int _currentIndex = 1;
@@ -91,11 +36,9 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
         automaticallyImplyLeading: false, // Remove the back arrow
         title: const Text(
           'Text Translator',
-          style:
-              TextStyle(color: Colors.white), // Clear, professional text color
+          style: TextStyle(color: Colors.white), // Clear, professional text color
         ),
-        backgroundColor:
-            const Color.fromARGB(255, 0, 64, 255), // Clean blue background
+        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Clean blue background
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -208,12 +151,10 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
                 onPressed: _translateText,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 0, 64, 255),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
-                icon: const Icon(Icons.translate,
-                    color: Colors.white), // Icon color
+                icon: const Icon(Icons.translate, color: Colors.white), // Icon color
                 label: const Text(
                   'Translate Text', // Button text
                   style: TextStyle(color: Colors.white), // Text color
@@ -240,9 +181,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
                 color: Colors.grey[200],
               ),
               child: Text(
-                _translatedText.isEmpty
-                    ? 'No translation yet'
-                    : _translatedText,
+                _translatedText.isEmpty ? 'No translation yet' : _translatedText,
                 style: const TextStyle(fontSize: 16, color: Colors.black87),
               ),
             ),
@@ -260,8 +199,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           } else if (index == 1) {
             // Stay on the text translator page
           } else if (index == 2) {
-            Navigator.pushNamed(
-                context, '/voiceTranslator'); // Navigate to Voice Translator
+            Navigator.pushNamed(context, '/voiceTranslator'); // Navigate to Voice Translator
           }
         },
         items: const [
