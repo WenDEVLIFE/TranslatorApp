@@ -9,6 +9,7 @@ class TextTranslatorPage extends StatefulWidget {
 }
 
 class _TextTranslatorPageState extends State<TextTranslatorPage> {
+  String _selectedLanguage = 'English to Mandaya';
   String _sourceLanguage = 'English';
   String _targetLanguage = 'Mandaya';
   final TextEditingController _textController = TextEditingController();
@@ -65,7 +66,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
             ),
             const SizedBox(height: 10),
             DropdownButton<String>(
-              value: 'English to Mandaya',
+              value: _selectedLanguage,
               items: <String>[
                 'English to Mandaya',
                 'Mandaya to English',
@@ -80,7 +81,8 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
               }).toList(),
               onChanged: (String? newValue) {
                 setState(() {
-                  if (newValue == 'English to Mandaya') {
+                  _selectedLanguage = newValue!;
+                  if (_selectedLanguage == 'English to Mandaya') {
                     _sourceLanguage = 'English';
                     _targetLanguage = 'Mandaya';
                   } else {

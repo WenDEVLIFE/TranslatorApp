@@ -7,8 +7,10 @@ class Translator {
   final Map<String, String> _translations = {
     'hello': 'kamusta',
     'goodbye': 'paalam',
-    'thank you': 'salamat',
-    'lets eat': 'mokaan da kita',
+    'thank': 'salamat',
+    'you': 'kaw',
+    'eat': 'mokaan da',
+    'let\'s ': 'kita',
     'what is your name?': 'unan pangan mo?',
     'how old are you?': 'pila yang edad mo?',
     'where did you live?': 'wayn kaw yaga\'uya?',
@@ -194,10 +196,13 @@ class Translator {
   Future<String> translateText(String text, String sourceLanguage, String targetLanguage) async {
     String translated = '';
 
+    // Trim and convert the input text to lowercase
+    String normalizedText = text.trim().toLowerCase();
+
     if (sourceLanguage.toLowerCase() == 'english' && targetLanguage.toLowerCase() == 'mandaya') {
-      translated = _translations[text.toLowerCase()] ?? 'Translation not found';
+      translated = _translations[normalizedText] ?? 'Translation not found';
     } else if (sourceLanguage.toLowerCase() == 'mandaya' && targetLanguage.toLowerCase() == 'english') {
-      translated = _reverseTranslations[text.toLowerCase()] ?? 'Translation not found';
+      translated = _reverseTranslations[normalizedText] ?? 'Translation not found';
     } else {
       translated = 'Same language selected. No translation needed.';
     }
@@ -208,6 +213,7 @@ class Translator {
 
     return translated;
   }
+
 
   Future<void> _saveTranslation(String sourceText, String translatedText, String sourceLanguage, String targetLanguage) async {
     final url = Uri.parse('http://localhost:27017/MobileTransApp'); // Adjust to your server URL if needed
