@@ -2,7 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:mandtrans_app/database/InitSQLite.dart';
+
 class Translator {
+
+  // The purpose of this is for testing purposes only
   // Madaya to English translations
   final Map<String, String> _translations = {
     'hello': 'kamusta',
@@ -332,6 +336,7 @@ class Translator {
     'achiever': 'academically'
   };
 
+
   Future<String> translateText(String inputText, String sourceLanguage, String targetLanguage) async {
     if (sourceLanguage == 'English' && targetLanguage == 'Mandaya') {
       // Split the input text into words
@@ -361,10 +366,16 @@ class Translator {
   Future<void> insertTranslationsToFirestore() async {
     try {
       // Insert _translations
-      await FirebaseFirestore.instance.collection('EnglishCollection').doc().set(_translations);
+      //await FirebaseFirestore.instance.collection('EnglishCollection').doc().set(_translations);
 
       // Insert _reverseTranslations
-      await FirebaseFirestore.instance.collection('MandayaCollection').doc().set(_reverseTranslations);
+      //await FirebaseFirestore.instance.collection('MandayaCollection').doc().set(_reverseTranslations);
+
+
+      // Store translations in SQLite
+      InitSQLite().initializeDatabase();
+      await InitSQLite().storeTranslationsInSQLite(_translations);
+      await InitSQLite().storeReverseTranslationsInSQLite(_reverseTranslations);
 
       print('Translations inserted successfully!');
     } catch (error) {

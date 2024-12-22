@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mandtrans_app/database/InitSQLite.dart';
 import 'component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {
@@ -17,7 +18,8 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   final Translator _translator = Translator();
 
   Future<void> _translateText() async {
-   // _translator.insertTranslationsToFirestore();
+    Translator translator = Translator();
+    await translator.insertTranslationsToFirestore();
     String translated = await _translator.translateText(
       _textController.text,
       _sourceLanguage,
@@ -30,6 +32,14 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   }
 
   int _currentIndex = 1;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   InitSQLite().printTranslations();
+    InitSQLite().printReverseTranslations();
+  }
 
   @override
   Widget build(BuildContext context) {
