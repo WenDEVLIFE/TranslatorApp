@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+
 import 'component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {

@@ -184,16 +184,16 @@ class Translator {
     'pagkatapos mo!': 'after you!',
     'pagdali kaan.': 'eat quickly!',
     'dalila yani adto kanmo': 'take it with you.',
-    'yang Davao Oriental state university isa sa pinaka madayaw na skwelahan sang lungsod ng mati.': 'The davao Oriental State University is one of the best schools in mati.',
-    'isa isab ngini na unibersidad na yaga prudos ng mga adaig na achiever.': 'many students at this University excel academically.'
+    'yang davao oriental state university isa sa pinaka madayaw na skwelahan sang lungsod ng mati.': 'the davao oriental state university is one of the best schools in mati.',
+    'isa isab ngini na unibersidad na yaga prudos ng mga adaig na achiever.': 'many students at this university excel academically.'
   };
 
   Future<String> translateText(String text, String sourceLanguage, String targetLanguage) async {
     String translated = '';
 
-    if (sourceLanguage == 'English' && targetLanguage == 'Mandaya') {
+    if (sourceLanguage.toLowerCase() == 'english' && targetLanguage.toLowerCase() == 'mandaya') {
       translated = _translations[text.toLowerCase()] ?? 'Translation not found';
-    } else if (sourceLanguage == 'Mandaya' && targetLanguage == 'English') {
+    } else if (sourceLanguage.toLowerCase() == 'mandaya' && targetLanguage.toLowerCase() == 'english') {
       translated = _reverseTranslations[text.toLowerCase()] ?? 'Translation not found';
     } else {
       translated = 'Same language selected. No translation needed.';
