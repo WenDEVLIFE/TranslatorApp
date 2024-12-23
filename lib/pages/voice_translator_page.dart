@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:permission_handler/permission_handler.dart';
-import 'component/Translator.dart';
+import '../component/Translator.dart';
 
 class VoiceTranslatorPage extends StatefulWidget {
   const VoiceTranslatorPage({super.key});
@@ -17,7 +17,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
   String _translatedText = '';
   String _selectedLanguage = 'English to Mandaya';
   final Translator _translator = Translator();
-
+  int _currentIndex = 2;
   @override
   void initState() {
     super.initState();
@@ -224,16 +224,16 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             icon: Icon(Icons.mic),
             label: 'Voice',
           ),
-          /*
-      BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            label: 'Language',
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'About Us',
           ),
-
-           */
 
         ],
         onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
           if (index == 0) {
             Navigator.pushNamed(context, '/'); // Navigate to Home
           } else if (index == 1) {
@@ -242,7 +242,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
           }
           else if (index == 3) {
-            Navigator.pushNamed(context, '/admin');
+            Navigator.pushNamed(context, '/aboutus');
           }
         },
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mandtrans_app/database/InitSQLite.dart';
-import 'component/Translator.dart'; // Adjust the import path
+import '../component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {
   const TextTranslatorPage({super.key});
@@ -33,11 +33,15 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _translator.RetrieveFromFirebase();
-   InitSQLite().printTranslations();
+    InitSQLite().printTranslations();
     InitSQLite().printReverseTranslations();
+    setState(() {
+      _selectedLanguage = 'English to Mandaya';
+      _sourceLanguage = 'English';
+      _targetLanguage = 'Mandaya';
+    });
   }
 
   @override
@@ -187,8 +191,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
             Navigator.pushNamed(context, '/voiceTranslator'); // Navigate to Voice Translator
           } else if (index == 3) {
             // Stay on the admin page
-            Navigator.pushNamed(context, '/admin');
-
+            Navigator.pushNamed(context, '/aboutus');
           }
         },
         items: const [
@@ -204,13 +207,10 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
             icon: Icon(Icons.mic),
             label: 'Voice',
           ),
-          /*
-      BottomNavigationBarItem(
-            icon: Icon(Icons.language),
-            label: 'Language',
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'About Us',
           ),
-
-           */
         ],
       ),
     );

@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mandtrans_app/pages/AboutUS.dart';
+import 'package:mandtrans_app/pages/voice_translator_page.dart';
 import 'database/AdminScreen.dart';
 import 'database/Firebase.dart';
-import 'text_translator_page.dart';
-import 'voice_translator_page.dart';
+import 'pages/text_translator_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MyHomePage(title: 'Mandaya Translator'),
         '/textTranslator': (context) => const TextTranslatorPage(),
         '/voiceTranslator': (context) => const VoiceTranslatorPage(),
-        '/admin': (context) => const AdminScreen(),
+        '/aboutus': (context) => const AboutPage(),
       },
     );
   }
