@@ -18,33 +18,54 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
   String _selectedLanguage = 'English to Mandaya';
   final Translator _translator = Translator();
   int _currentIndex = 2;
+
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
+    _translator.RetrieveFromFirebase();
+  }
+
+  Future<void> _requestMicrophonePermission() async {
+    while (!(await Permission.microphone.isGranted)) {
+      await Permission.microphone.request();
+    }
   }
 
   Future<void> _startListening() async {
-    if (await Permission.microphone.request().isGranted) {
-      bool available = await _speech.initialize(
-        onStatus: (val) => setState(() => _isListening = val == 'listening'),
-        onError: (val) => setState(() => _isListening = false),
+    await _requestMicrophonePermission();
+    bool available = await _speech.initialize(
+      onStatus: (val) => setState(() => _isListening = val == 'listening'),
+      onError: (val) => setState(() => _isListening = false),
+    );
+    if (available) {
+      setState(() => _isListening = true);
+      _speech.listen(
+        onResult: (val) => setState(() {
+          _text = _postProcessText(val.recognizedWords);
+          print('Recognized words: $_text'); // Debugging statement
+        }),
+        localeId: 'en_US', // Set the locale to English (US)
+        listenMode: stt.ListenMode.dictation, // Use dictation mode for better accuracy
       );
-      if (available) {
-        setState(() => _isListening = true);
-        _speech.listen(
-          onResult: (val) => setState(() {
-            _text = val.recognizedWords;
-            print('Recognized words: $_text'); // Debugging statement
-          }),
-        );
-      }
     } else {
       setState(() {
         _isListening = false;
         _translatedText = 'Microphone permission denied';
       });
     }
+  }
+
+  String _postProcessText(String recognizedWords) {
+    // Correct common misrecognitions
+    if (recognizedWords.toLowerCase() == 'nissan' || recognizedWords.toLowerCase() == 'design' || recognizedWords.toLowerCase() == 'dizan') {
+      return 'disan';
+    }
+
+    if (recognizedWords == 'yutay' || recognizedWords == 'new thai' || recognizedWords == 'yutayy') {
+      return 'dyutay';
+    }
+    return recognizedWords;
   }
 
   void _stopListening() {
@@ -228,7 +249,6 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             icon: Icon(Icons.info),
             label: 'About Us',
           ),
-
         ],
         onTap: (int index) {
           setState(() {
@@ -240,8 +260,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
             Navigator.pushNamed(context, '/textTranslator'); // Navigate to Text Translator
           } else if (index == 2) {
             Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
-          }
-          else if (index == 3) {
+          } else if (index == 3) {
             Navigator.pushNamed(context, '/aboutus');
           }
         },

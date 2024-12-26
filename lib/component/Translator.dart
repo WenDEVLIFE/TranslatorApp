@@ -74,39 +74,67 @@ class Translator {
 
   Future<Map<String, String>> getTranslations1() async {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    try {
-      DocumentSnapshot snapshot = await _firestore.collection("EnglishCollection").doc('dljOVeQs8xdpcybZuQxo').get();
-      if (snapshot.exists) {
-        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-        print('Translations found');
-        return data.map((key, value) => MapEntry(key, value.toString()));
-      } else {
-        print('No translations found');
-        return {};
+    const int maxRetries = 5;
+    int retryCount = 0;
+    Duration delay = Duration(seconds: 1);
+
+    while (retryCount < maxRetries) {
+      try {
+        DocumentSnapshot snapshot = await _firestore.collection("EnglishCollection").doc('dljOVeQs8xdpcybZuQxo').get();
+        if (snapshot.exists) {
+          Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+          print('Translations found');
+          return data.map((key, value) => MapEntry(key, value.toString()));
+        } else {
+          print('No translations found');
+          return {};
+        }
+      } catch (e) {
+        if (e is FirebaseException && e.code == 'unavailable') {
+          retryCount++;
+          print('Retry $retryCount: Firestore service unavailable, retrying in $delay...');
+          await Future.delayed(delay);
+          delay *= 2; // Exponential backoff
+        } else {
+          print('Error retrieving translations: $e');
+          return {};
+        }
       }
-    } catch (e) {
-      print('Error retrieving translations: $e');
-      return {};
     }
+    print('Failed to fetch translations after $maxRetries retries.');
+    return {};
   }
 
   Future<Map<String, String>> getTranslations2() async {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    try {
-      DocumentSnapshot snapshot = await _firestore.collection("MandayaCollection").doc('57UXvyBqAGiNR6Z6yVY8').get();
-      if (snapshot.exists) {
-        Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-        print('Reverse Translations found');
-        return data.map((key, value) => MapEntry(key, value.toString()));
-      } else {
-        print('No translations found');
-        return {};
+    const int maxRetries = 5;
+    int retryCount = 0;
+    Duration delay = Duration(seconds: 1);
+
+    while (retryCount < maxRetries) {
+      try {
+        DocumentSnapshot snapshot = await _firestore.collection("MandayaCollection").doc('57UXvyBqAGiNR6Z6yVY8').get();
+        if (snapshot.exists) {
+          Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+          print('Reverse Translations found');
+          return data.map((key, value) => MapEntry(key, value.toString()));
+        } else {
+          print('No translations found');
+          return {};
+        }
+      } catch (e) {
+        if (e is FirebaseException && e.code == 'unavailable') {
+          retryCount++;
+          print('Retry $retryCount: Firestore service unavailable, retrying in $delay...');
+          await Future.delayed(delay);
+          delay *= 2; // Exponential backoff
+        } else {
+          print('Error retrieving translations: $e');
+          return {};
+        }
       }
-    } catch (e) {
-      print('Error retrieving translations: $e');
-      return {};
     }
+    print('Failed to fetch translations after $maxRetries retries.');
+    return {};
   }
-
-
 }
