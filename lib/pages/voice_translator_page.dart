@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:flutter_speech/flutter_speech.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../component/Translator.dart';
 
@@ -11,7 +11,7 @@ class VoiceTranslatorPage extends StatefulWidget {
 }
 
 class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
-  late stt.SpeechToText _speech;
+  late SpeechRecognition _speech;
   bool _isListening = false;
   String _text = '';
   String _translatedText = '';
@@ -22,50 +22,55 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
   @override
   void initState() {
     super.initState();
-    _speech = stt.SpeechToText();
+    _speech = SpeechRecognition();
+    _speech.setAvailabilityHandler((bool result) => setState(() => _isListening = result));
+    _speech.setRecognitionStartedHandler(() => setState(() => _isListening = true));
+    _speech.setRecognitionResultHandler((String text) => setState(() => _text = _postProcessText(text)));
+    _speech.setRecognitionCompleteHandler((String result) => setState(() => _isListening = false));
     _translator.RetrieveFromFirebase();
   }
 
   Future<void> _requestMicrophonePermission() async {
-    while (!(await Permission.microphone.isGranted)) {
+    if (await Permission.microphone.isDenied) {
       await Permission.microphone.request();
     }
   }
 
   Future<void> _startListening() async {
+    // Request microphone permission
     await _requestMicrophonePermission();
-    bool available = await _speech.initialize(
-      onStatus: (val) => setState(() => _isListening = val == 'listening'),
-      onError: (val) => setState(() => _isListening = false),
-    );
-    if (available) {
-      setState(() => _isListening = true);
-      _speech.listen(
-        onResult: (val) => setState(() {
-          _text = _postProcessText(val.recognizedWords);
-          print('Recognized words: $_text'); // Debugging statement
-        }),
-        localeId: 'en_US', // Set the locale to English (US)
-        listenMode: stt.ListenMode.dictation, // Use dictation mode for better accuracy
-      );
-    } else {
+    if (!(await Permission.microphone.isGranted)) {
+      print('Microphone permission not granted.');
+      return;
+    }
+
+    // Start listening if permission is granted
+    try {
       setState(() {
-        _isListening = false;
-        _translatedText = 'Microphone permission denied';
+        _isListening = true; // Update the listening status
+      });
+
+      // Start the listening process
+      await _speech.listen(); // No named parameters
+      print('Listening...');
+    } catch (e) {
+      print('Error while starting listening: $e');
+      setState(() {
+        _isListening = false; // Reset listening status in case of an error
       });
     }
   }
 
-  String _postProcessText(String recognizedWords) {
-    // Correct common misrecognitions
-    if (recognizedWords.toLowerCase() == 'nissan' || recognizedWords.toLowerCase() == 'design' || recognizedWords.toLowerCase() == 'dizan') {
-      return 'disan';
-    }
 
-    if (recognizedWords == 'yutay' || recognizedWords == 'new thai' || recognizedWords == 'yutayy') {
-      return 'dyutay';
-    }
-    return recognizedWords;
+  String _postProcessText(String recognizedWords) {
+    final corrections = {
+      'nissan': 'disan',
+      'design': 'disan',
+      'duty': 'dyutay',
+      'new thai': 'dyutay',
+      'basel': 'baso',
+    };
+    return corrections[recognizedWords.toLowerCase()] ?? recognizedWords;
   }
 
   void _stopListening() {
