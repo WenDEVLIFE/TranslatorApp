@@ -40,11 +40,18 @@ class aboutState extends State<AboutPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '"Kamayo Translator" . With this application, you may translate from Mandaya to English and vice versa. The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture. Additionally, the application will support the Mandaya people in preserving their language and cultural identity while promoting cultural awareness among non-Speakers.To guarantee correctness, the application entails gathering and evaluating language data with native speakers. Speech recognition, offline capabilities, and real-time text and voice translation will all be included in the program. In order to help users better understand Mandaya culture, it will also provide cultural remarks and contextual information. Community input will guarantee that the app satisfies Mandaya\'s requirements.',
+                  '"Kamayo Translator" . With this application, you may translate from Mandaya to English and vice versa. The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture.'
+                      ' Additionally, the application will support the Mandaya people in preserving their language and cultural identity while promoting cultural awareness among non-Speakers.'
+                      'To guarantee correctness, the application entails gathering and evaluating language data with native speakers. Speech recognition, offline capabilities, and real-time text and voice translation will all be included in the program.'
+                      ' In order to help users better understand Mandaya culture, it will also provide cultural remarks and contextual information. Community input will guarantee that the app satisfies Mandaya\'s requirements.',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black54,
+                    fontFamily: 'OpenSans',
+
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
+                  textAlign: TextAlign.justify,
                 ),
               ],
             ),

@@ -140,7 +140,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
-                icon: const Icon(Icons.translate, color: Colors.white), // Icon color
+                icon: const Icon(Icons.text_fields, color: Colors.white), // Icon color
                 label: const Text(
                   'Translate Text', // Button text
                   style: TextStyle(color: Colors.white), // Text color

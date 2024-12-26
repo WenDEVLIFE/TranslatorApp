@@ -164,7 +164,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _translateVoice,
-                icon: const Icon(Icons.translate),
+                icon: const Icon(Icons.text_fields),
                 label: const Text('Translate Voice'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
