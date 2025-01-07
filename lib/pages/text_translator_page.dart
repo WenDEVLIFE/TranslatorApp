@@ -253,7 +253,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.mic),
             label: 'Voice',
-          )
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'About Us',
