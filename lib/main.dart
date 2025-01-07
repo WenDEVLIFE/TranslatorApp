@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mandtrans_app/pages/AboutUS.dart';
 import 'package:mandtrans_app/pages/voice_translator_page.dart';
+import 'component/NavigationComponent.dart';
 import 'database/AdminScreen.dart';
 import 'database/Firebase.dart';
 import 'pages/text_translator_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/textTranslator': (context) => const TextTranslatorPage(),
         '/voiceTranslator': (context) => const VoiceTranslatorPage(),
         '/aboutus': (context) => const AboutPage(),
+        'navigation': (context) => const Navigationcomponent(),
       },
     );
   }
