@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         '/textTranslator': (context) => const TextTranslatorPage(),
         '/voiceTranslator': (context) => const VoiceTranslatorPage(),
         '/aboutus': (context) => const AboutPage(),
-        'navigation': (context) => const Navigationcomponent(),
+        '/navigation': (context) => const Navigationcomponent(),
       },
     );
   }
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    _showMenuDialog(context);
+                   Navigator.pushNamed(context, '/navigation');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(

@@ -233,43 +233,6 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-        selectedItemColor: const Color.fromARGB(255, 0, 64, 255),
-        unselectedItemColor: Colors.black87,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.text_fields),
-            label: 'Text',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mic),
-            label: 'Voice',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About Us',
-          ),
-        ],
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          if (index == 0) {
-            Navigator.pushNamed(context, '/'); // Navigate to Home
-          } else if (index == 1) {
-            Navigator.pushNamed(context, '/textTranslator'); // Navigate to Text Translator
-          } else if (index == 2) {
-            Navigator.pushNamed(context, '/voiceTranslator'); // Current Page
-          } else if (index == 3) {
-            Navigator.pushNamed(context, '/aboutus');
-          }
-        },
-      ),
     );
   }
 }
