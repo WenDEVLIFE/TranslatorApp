@@ -113,6 +113,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
       ),
       body: Container(
         color: const Color.fromARGB(255, 245, 245, 245),
+
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

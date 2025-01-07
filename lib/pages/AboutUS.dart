@@ -30,13 +30,25 @@ class aboutState extends State<AboutPage> {
         ),
         backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Clean blue background
       ),
-      body: const SingleChildScrollView(
-        padding: EdgeInsets.all(20.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 10),
-            Column(
+            const SizedBox(height: 10),
+             Center(
+              child: Container(
+                 height: 200,
+                 width: 200,
+                 decoration: const BoxDecoration(
+                   image: DecorationImage(
+                     image: AssetImage('assets/images/logo2.png'),
+                     fit: BoxFit.fill,
+                   ),
+                 ),
+               ),
+             ),
+            const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -55,7 +67,7 @@ class aboutState extends State<AboutPage> {
                 ),
               ],
             ),
-            SizedBox(height: 20), // Adjusted space here
+            const SizedBox(height: 20), // Adjusted space here
           ],
         ),
       ),

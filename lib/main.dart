@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 // Logo Image
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/logo2.png',
                   width: 150,
                   height: 150,
                 ),
