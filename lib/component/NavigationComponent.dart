@@ -22,7 +22,7 @@ class _NavControllerState extends State<Navigationcomponent> {
   late String email;
 
   late String id; // Initialize id
-  int _currentIndex = 1; // Initialize to index 1
+  int _currentIndex = 0; // Initialize to index 1
 
   @override
   void initState() {
@@ -36,10 +36,9 @@ class _NavControllerState extends State<Navigationcomponent> {
   }
   List<Widget> _getNavBarItems() {
     List<Widget> items = [
-        _buildNavItem(0, Icons.home),
-        _buildNavItem(1, Icons.text_fields),
-        _buildNavItem(2, Icons.mic),
-        _buildNavItem(3, Icons.info),
+        _buildNavItem(0, Icons.text_fields),
+        _buildNavItem(1, Icons.mic),
+        _buildNavItem(2, Icons.info),
       ];
 
     return items;
@@ -47,7 +46,6 @@ class _NavControllerState extends State<Navigationcomponent> {
 
   List<Widget> _getPageViewChildren() {
     List<Widget> pages = [
-      const MyHomePage(title: 'Mandaya Translator'),
       const TextTranslatorPage(),
       const VoiceTranslatorPage(),
       const AboutPage(),
