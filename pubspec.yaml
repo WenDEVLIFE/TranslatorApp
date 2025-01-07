@@ -21,18 +21,10 @@ dependencies:
   sqflite: ^2.0.0+4
   path: ^1.8.0
   flutter_speech: ^2.0.0
-  #mongo_dart: ^0.10.3
-  #http: ^1.2.2  # Use the latest compatible version
- 
- 
-
-  #dependencies:
-  #firebase_data_connect: <version>
+  convex_bottom_bar: ^3.2.0
+  curved_navigation_bar: ^1.0.6
 
   
-  
-
-
 
 dev_dependencies:
   flutter_test:

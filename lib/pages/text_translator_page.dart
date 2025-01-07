@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mandtrans_app/database/InitSQLite.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../component/Translator.dart'; // Adjust the import path
 
 class TextTranslatorPage extends StatefulWidget {
@@ -16,6 +18,9 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   final TextEditingController _textController = TextEditingController();
   String _translatedText = '';
   final Translator _translator = Translator();
+  late stt.SpeechToText _speech;
+  bool _isAvailable = false;
+  bool _isListening = false;
 
   Future<void> _translateText() async {
     String translated = await _translator.translateText(
@@ -27,6 +32,46 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
     setState(() {
       _translatedText = translated;
     });
+  }
+
+  Future<void> _initSpeech() async {
+    var status = await Permission.microphone.request();
+    if (status.isGranted) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      setState(() {
+        _isAvailable = available;
+      });
+    } else {
+      setState(() {
+        _isAvailable = false;
+      });
+      print('Microphone permission not granted');
+    }
+  }
+
+  void _startListening() {
+    if (_isAvailable && !_isListening) {
+      _speech.listen(
+        onResult: (val) => setState(() {
+          _textController.text = val.recognizedWords;
+        }),
+      );
+      setState(() {
+        _isListening = true;
+      });
+    }
+  }
+
+  void _stopListening() {
+    if (_isListening) {
+      _speech.stop();
+      setState(() {
+        _isListening = false;
+      });
+    }
   }
 
   int _currentIndex = 1;
@@ -42,6 +87,8 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
       _sourceLanguage = 'English';
       _targetLanguage = 'Mandaya';
     });
+    _speech = stt.SpeechToText();
+    _initSpeech();
   }
 
   @override
@@ -206,7 +253,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.mic),
             label: 'Voice',
-          ),
+          )
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
             label: 'About Us',
