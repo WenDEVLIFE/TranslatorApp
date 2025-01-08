@@ -217,11 +217,24 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                   child: Container(
                     height: 100,
                     width: 100,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/translation.png'),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/voice.jpg'),
                         fit: BoxFit.fill,
                       ),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
                     ),
                   ),
                 ),
