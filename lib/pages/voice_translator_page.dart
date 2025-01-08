@@ -232,7 +232,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                 const SizedBox(height: 20),
 
                 Container(
-                  width: 200,
+                  width: 300,
                   height: 50,
                   decoration: BoxDecoration(
                     color: Colors.grey[800],

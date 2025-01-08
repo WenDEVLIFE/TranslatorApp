@@ -110,7 +110,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    width: 200,
+                    width: 300,
                     height: 50,
                     decoration: BoxDecoration(
                       color: Colors.grey[800],
