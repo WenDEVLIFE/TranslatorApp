@@ -80,7 +80,7 @@ class aboutState extends State<AboutPage> {
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
-                    textAlign: TextAlign.justify,
+                    //textAlign: TextAlign.justify,
                   ),
                   const SizedBox(height: 20), // Adjusted space here
                 ],
