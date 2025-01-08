@@ -100,125 +100,169 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           'Text Translator',
           style: TextStyle(color: Colors.white), // Clear, professional text color
         ),
-        backgroundColor: Colors.grey[800], // Light gra
+        backgroundColor: Colors.grey[800], // Light gray background
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 10),
-            const Text(
-              'Easily translate text between English and Mandaya.',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
-              ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/map.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Container(
+            width: 320,
+            height: 550,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0.0, 1.0),
+                  blurRadius: 6.0,
+                ),
+              ],
             ),
-            const SizedBox(height: 20), // Adjusted space here
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 20), // Adjusted space here
 
-            // Dropdown for Source Language
-            const Text(
-              'Select Translation Language:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 10),
-            DropdownButton<String>(
-              value: _selectedLanguage,
-              items: <String>[
-                'English to Mandaya',
-                'Mandaya to English',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: const TextStyle(color: Colors.black),
+                  // Dropdown for Source Language
+                  const Text(
+                    'Select Translation Language:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedLanguage = newValue!;
-                  if (_selectedLanguage == 'English to Mandaya') {
-                    _sourceLanguage = 'English';
-                    _targetLanguage = 'Mandaya';
-                  } else {
-                    _sourceLanguage = 'Mandaya';
-                    _targetLanguage = 'English';
-                  }
-                });
-              },
-              dropdownColor: Colors.white,
-              iconEnabledColor: Colors.black,
-            ),
+                  const SizedBox(height: 10),
+                  Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[800],
+                      border: Border.all(color: Colors.grey, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        canvasColor: Colors.grey[800], // Set dropdown background color to black
+                      ),
+                      child: DropdownButton<String>(
+                        value: _selectedLanguage,
+                        items: <String>['English to Mandaya', 'Mandaya to English']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: const TextStyle(color: Colors.white), // Change text color here
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedLanguage = newValue!;
+                            if (_selectedLanguage == 'English to Mandaya') {
+                              _sourceLanguage = 'English';
+                              _targetLanguage = 'Mandaya';
+                            } else {
+                              _sourceLanguage = 'Mandaya';
+                              _targetLanguage = 'English';
+                            }
+                          });
+                        },
+                        dropdownColor: Colors.grey[800], // Set dropdown background color to black
+                        iconEnabledColor: Colors.white,
+                        style: const TextStyle(color: Colors.white), // Change text color here
+                        selectedItemBuilder: (BuildContext context) {
+                          return <String>['English to Mandaya', 'Mandaya to English']
+                              .map<Widget>((String value) {
+                            return Text(
+                              value,
+                              style: const TextStyle(color: Colors.white), // Change selected item text color to white
+                            );
+                          }).toList();
+                        },
+                        isExpanded: true, // Ensure the dropdown button is expanded
+                        alignment: Alignment.bottomLeft, // Align the text to the left
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
 
-            // Text input for translation
-            const Text(
-              'Enter Text:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'Type your text here...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-              ),
-              maxLines: 5,
-            ),
-            const SizedBox(height: 20), // Reduced space here
+                  // Text input for translation
+                  const Text(
+                    'Enter Text:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    controller: _textController,
+                    decoration: InputDecoration(
+                      hintText: 'Type your text here...',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: Colors.grey),
+                      ),
+                    ),
+                    maxLines: 5,
+                  ),
+                  const SizedBox(height: 20), // Reduced space here
 
-            // Translate Button
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: _translateText,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[800], // Light gra
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: const TextStyle(fontSize: 18),
-                ),
-                icon: const Icon(Icons.text_fields, color: Colors.white), // Icon color
-                label: const Text(
-                  'Translate Text', // Button text
-                  style: TextStyle(color: Colors.white), // Text color
-                ),
-              ),
-            ),
-            const SizedBox(height: 20), // Adjusted space after button
+                  // Translate Button
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: _translateText,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[800], // Light gray background
+                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        textStyle: const TextStyle(fontSize: 18),
+                      ),
+                      icon: const Icon(Icons.text_fields, color: Colors.white), // Icon color
+                      label: const Text(
+                        'Translate Text', // Button text
+                        style: TextStyle(color: Colors.white), // Text color
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20), // Adjusted space after button
 
-            // Display Translated Text
-            const Text(
-              'Translated Text:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
+                  // Display Translated Text
+                  const Text(
+                    'Translated Text:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Container(
+                    padding: const EdgeInsets.all(7),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey[200],
+                    ),
+                    child: Text(
+                      _translatedText.isEmpty ? 'No translation yet' : _translatedText,
+                      style: const TextStyle(fontSize: 16, color: Colors.black87),
+                    ),
+                  ),
+                  const SizedBox(height: 20), // Adjusted space after translated text
+                ],
               ),
             ),
-            const SizedBox(height: 3),
-            Container(
-              padding: const EdgeInsets.all(7),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.grey[200],
-              ),
-              child: Text(
-                _translatedText.isEmpty ? 'No translation yet' : _translatedText,
-                style: const TextStyle(fontSize: 16, color: Colors.black87),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
