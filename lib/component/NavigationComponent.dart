@@ -88,7 +88,7 @@ class _NavControllerState extends State<Navigationcomponent> {
         children: [
           CurvedNavigationBar(
             backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-            color:  const Color.fromARGB(255, 0, 64, 255),
+            color: const Color.fromARGB(255, 66, 66, 66),
             items: _getNavBarItems(),
             index: _currentIndex,
             // Set the initial index

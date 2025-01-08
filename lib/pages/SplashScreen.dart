@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>{
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color:Colors.blueAccent
+          color: Color.fromARGB(255, 66, 66, 66),
         ),
         child: Center(
           child: Column(
