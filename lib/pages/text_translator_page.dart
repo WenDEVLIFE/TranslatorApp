@@ -34,48 +34,6 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
     });
   }
 
-  Future<void> _initSpeech() async {
-    var status = await Permission.microphone.request();
-    if (status.isGranted) {
-      bool available = await _speech.initialize(
-        onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
-      );
-      setState(() {
-        _isAvailable = available;
-      });
-    } else {
-      setState(() {
-        _isAvailable = false;
-      });
-      print('Microphone permission not granted');
-    }
-  }
-
-  void _startListening() {
-    if (_isAvailable && !_isListening) {
-      _speech.listen(
-        onResult: (val) => setState(() {
-          _textController.text = val.recognizedWords;
-        }),
-      );
-      setState(() {
-        _isListening = true;
-      });
-    }
-  }
-
-  void _stopListening() {
-    if (_isListening) {
-      _speech.stop();
-      setState(() {
-        _isListening = false;
-      });
-    }
-  }
-
-  int _currentIndex = 1;
-
   @override
   void initState() {
     super.initState();
@@ -88,7 +46,6 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
       _targetLanguage = 'Mandaya';
     });
     _speech = stt.SpeechToText();
-    _initSpeech();
   }
 
   @override
