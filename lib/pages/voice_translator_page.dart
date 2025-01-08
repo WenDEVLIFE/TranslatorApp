@@ -207,12 +207,24 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Logo with pulsating effect
-                const Image(image: AssetImage('assets/images/logo2.png'), width: 150, height: 150),
+                const SizedBox(height: 10), // Adjusted space here
+                Center(
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/translation.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 10),
                 const Text(
-                  'VOICE TRANSLATOR',
+                  'Select Translation Language:',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),

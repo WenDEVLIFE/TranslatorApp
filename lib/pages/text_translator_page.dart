@@ -93,7 +93,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
                       width: 100,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/translation.png'),
+                          image: AssetImage('assets/images/language.png'),
                           fit: BoxFit.fill,
                         ),
                       ),
