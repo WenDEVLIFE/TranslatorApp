@@ -129,13 +129,26 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                 animation: _animationController,
                 builder: (context, child) {
                   double scale = 1 + _animationController.value * 0.5;
-                  return Transform.scale(
-                    scale: scale,
-                    child: const Icon(
-                      Icons.mic,
-                      size: 100,
-                      color: Colors.red,
-                    ),
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Transform.scale(
+                        scale: scale,
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.red, width: 4),
+                          ),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.mic,
+                        size: 80,
+                        color: Colors.red,
+                      ),
+                    ],
                   );
                 },
               ),
@@ -207,28 +220,50 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                 const SizedBox(height: 20),
 
                 Container(
+                  width: 200,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: Colors.grey[800],
                     border: Border.all(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: DropdownButton<String>(
-                    value: _selectedLanguage,
-                    items: <String>['English to Mandaya', 'Mandaya to English']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedLanguage = newValue!;
-                      });
-                    },
-                    dropdownColor: Colors.white,
-                    iconEnabledColor: Colors.white,
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      canvasColor: Colors.grey[800], // Set dropdown background color to black
+                    ),
+                    child: DropdownButton<String>(
+                      value: _selectedLanguage,
+                      items: <String>['English to Mandaya', 'Mandaya to English']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(color: Colors.white), // Change text color here
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedLanguage = newValue!;
+                        });
+                      },
+                      dropdownColor: Colors.grey[800], // Set dropdown background color to black
+                      iconEnabledColor: Colors.white,
+                      style: const TextStyle(color: Colors.white), // Change text color here
+                      selectedItemBuilder: (BuildContext context) {
+                        return <String>['English to Mandaya', 'Mandaya to English']
+                            .map<Widget>((String value) {
+                          return Text(
+                            value,
+                            style: const TextStyle(color: Colors.white), // Change selected item text color to white
+                          );
+                        }).toList();
+                      },
+                      isExpanded: true, // Ensure the dropdown button is expanded
+                      alignment: Alignment.bottomLeft, // Align the text to the left
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
