@@ -21,12 +21,16 @@ class aboutState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Remove the back arrow
+        automaticallyImplyLeading: false,
         title: const Text(
-          'About Us',
-          style: TextStyle(color: Colors.white), // Clear, professional text color
+          'Text Translator',
+          style: TextStyle(color: Colors.white,
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w700
+          ),
         ),
-        backgroundColor: Colors.grey[800], // Light gray background
+        backgroundColor: Colors.grey[800],
+        centerTitle: true, // Center the title
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -81,6 +85,7 @@ class aboutState extends State<AboutPage> {
                       color: Colors.black,
                     ),
                     //textAlign: TextAlign.justify,
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20), // Adjusted space here
                 ],

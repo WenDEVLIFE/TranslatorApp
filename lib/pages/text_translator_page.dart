@@ -52,12 +52,16 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, // Remove the back arrow
+        automaticallyImplyLeading: false,
         title: const Text(
           'Text Translator',
-          style: TextStyle(color: Colors.white), // Clear, professional text color
+          style: TextStyle(color: Colors.white,
+              fontFamily: 'OpenSans',
+              fontWeight: FontWeight.w700
+          ),
         ),
-        backgroundColor: Colors.grey[800], // Light gray background
+        backgroundColor: Colors.grey[800],
+        centerTitle: true, // Center the title
       ),
       body: Container(
         decoration: const BoxDecoration(

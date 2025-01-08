@@ -173,14 +173,18 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          'Voice Translator',
-          style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(
+            'Voice Translator',
+            style: TextStyle(color: Colors.white,
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.w700
+            ),
+          ),
+          backgroundColor: Colors.grey[800],
+          centerTitle: true, // Center the title
         ),
-        backgroundColor: Colors.grey[800],
-      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -225,7 +229,8 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                   'Select Translation Language:',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
@@ -308,7 +313,8 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                   'Translated Text:',
                   style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
@@ -323,7 +329,9 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
                   ),
                   child: Text(
                     _translatedText.isEmpty ? 'No translation yet.' : _translatedText,
-                    style: const TextStyle(fontSize: 16, color: Colors.black87),
+                    style: const TextStyle(fontSize: 16, color: Colors.black87,
+                        fontFamily: 'OpenSans',
+                        fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
                 ),
