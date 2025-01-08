@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/navigation');
+                    Navigator.pushReplacementNamed(context, '/navigation');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(

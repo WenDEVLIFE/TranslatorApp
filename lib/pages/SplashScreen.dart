@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>{
       setState(() {
         _isLoading = false;
 
-        Navigator.pushNamed(context, '/splashscreen1');
+        Navigator.pushReplacementNamed(context, '/splashscreen1');
       });
 
     });
