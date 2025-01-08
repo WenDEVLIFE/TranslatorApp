@@ -77,21 +77,42 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Logo Image
-                Image.asset(
-                  'assets/images/logo2.png',
-                  width: 150,
-                  height: 150,
-                ),
                 const SizedBox(height: 10),
                 const Text(
                   'KAMAYO MOBILE TRANSLATOR',
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    fontFamily: 'OpenSans',
+                    fontWeight: FontWeight.w700,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
+                  textAlign: TextAlign.center,
                 ),
+                Container(
+                  height: 180,
+                  width: 180,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/man.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                 const Center(
+                  child:Text(
+                    'HELLO, WELCOME TO KAMAYO MOBILE TRANSLATOR',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'OpenSans',
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromARGB(255, 255, 255, 255),
+
+                    ),
+                      textAlign: TextAlign.center,
+                  ),
+                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
