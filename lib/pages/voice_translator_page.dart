@@ -179,6 +179,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> with SingleTi
             'Voice Translator',
             style: TextStyle(color: Colors.white,
                 fontFamily: 'OpenSans',
+                fontSize: 35,
                 fontWeight: FontWeight.w700
             ),
           ),

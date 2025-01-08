@@ -57,6 +57,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           'Text Translator',
           style: TextStyle(color: Colors.white,
               fontFamily: 'OpenSans',
+              fontSize: 35,
               fontWeight: FontWeight.w700
           ),
         ),

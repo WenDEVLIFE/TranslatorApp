@@ -23,9 +23,10 @@ class aboutState extends State<AboutPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'Text Translator',
+          'About',
           style: TextStyle(color: Colors.white,
               fontFamily: 'OpenSans',
+              fontSize: 35,
               fontWeight: FontWeight.w700
           ),
         ),
