@@ -109,10 +109,10 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
           'Voice Translator',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+        backgroundColor: Colors.grey[800], // Light gra
       ),
       body: Container(
-        color: const Color.fromARGB(255, 245, 245, 245),
+        color: Colors.grey[200], // Light gray color
 
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -167,7 +167,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
-                  backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+                  backgroundColor: Colors.grey[800], // Light gra
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -196,7 +196,7 @@ class _VoiceTranslatorPageState extends State<VoiceTranslatorPage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
-                  backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+                  backgroundColor: Colors.grey[800], // Light gra
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

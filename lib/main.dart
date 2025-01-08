@@ -66,7 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // Blue background for the upper half
           Container(
             height: MediaQuery.of(context).size.height * 0.4,
-            color: Colors.blueAccent,
+           decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/map.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           // Main content centered
           Center(

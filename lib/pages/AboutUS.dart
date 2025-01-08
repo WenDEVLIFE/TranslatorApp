@@ -28,7 +28,7 @@ class aboutState extends State<AboutPage> {
           'About Us',
           style: TextStyle(color: Colors.white), // Clear, professional text color
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Clean blue background
+        backgroundColor: Colors.grey[800], // Light gra
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),

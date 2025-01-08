@@ -100,7 +100,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
           'Text Translator',
           style: TextStyle(color: Colors.white), // Clear, professional text color
         ),
-        backgroundColor: const Color.fromARGB(255, 0, 64, 255), // Clean blue background
+        backgroundColor: Colors.grey[800], // Light gra
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -183,7 +183,7 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
               child: ElevatedButton.icon(
                 onPressed: _translateText,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 0, 64, 255),
+                  backgroundColor: Colors.grey[800], // Light gra
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
