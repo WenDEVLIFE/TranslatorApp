@@ -58,7 +58,7 @@ class aboutState extends State<AboutPage> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const SizedBox(height: 10),
                   Center(
@@ -74,17 +74,41 @@ class aboutState extends State<AboutPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'OpenSans',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Kamayo Translator. With this application,you may translate from Mandaya to English and vice versa.The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture.\n\n',
+                        ),
+                        TextSpan(
+                          text: 'Additionally, the application will support the Mandaya people in preserving their language and cultural identity while promoting cultural awareness among non-Speakers.\n\n',
+                        ),
+                        TextSpan(
+                          text: 'To guarantee correctness,the application entails gathering and evaluating language data with native speakers. Speech recognition, offline capabilities, and real-time text and voice translation will all be included in the program.\n\n',
+                        ),
+                        TextSpan(
+                          text: 'In order to help users better understand Mandaya culture, it will also provide cultural remarks and contextual information. Community input will guarantee that the app satisfies Mandaya\'s requirements.',
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10), // Adjusted space here
                   const Text(
-                    '"Kamayo Translator" . With this application, you may translate from Mandaya to English and vice versa. The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture.'
-                        ' Additionally, the application will support the Mandaya people in preserving their language and cultural identity while promoting cultural awareness among non-Speakers.'
-                        'To guarantee correctness, the application entails gathering and evaluating language data with native speakers. Speech recognition, offline capabilities, and real-time text and voice translation will all be included in the program.'
-                        ' In order to help users better understand Mandaya culture, it will also provide cultural remarks and contextual information. Community input will guarantee that the app satisfies Mandaya\'s requirements.',
+                    'Developed by: TripleM',
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'OpenSans',
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
+
                     //textAlign: TextAlign.justify,
                     textAlign: TextAlign.center,
                   ),
