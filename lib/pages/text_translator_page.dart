@@ -86,8 +86,20 @@ class _TextTranslatorPageState extends State<TextTranslatorPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const SizedBox(height: 20), // Adjusted space here
-
+                  const SizedBox(height: 10), // Adjusted space here
+                  Center(
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/translation.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10), // Adjusted space here
                   // Dropdown for Source Language
                   const Text(
                     'Select Translation Language:',
