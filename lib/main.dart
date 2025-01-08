@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mandtrans_app/pages/AboutUS.dart';
+import 'package:mandtrans_app/pages/SplashScreen.dart';
 import 'package:mandtrans_app/pages/voice_translator_page.dart';
 import 'component/NavigationComponent.dart';
 import 'database/AdminScreen.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(title: 'Mandaya Translator'),
+        '/': (context) => SplashScreen(),
+        '/splashscreen1': (context) => const MyHomePage(title: 'Mandaya Translator'),
         '/textTranslator': (context) => const TextTranslatorPage(),
         '/voiceTranslator': (context) => const VoiceTranslatorPage(),
         '/aboutus': (context) => const AboutPage(),

@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen>{
       setState(() {
         _isLoading = false;
 
-        Navigator.pushNamed(context, '/navigation');
+        Navigator.pushNamed(context, '/splashscreen1');
       });
 
     });
@@ -34,14 +34,14 @@ class _SplashScreenState extends State<SplashScreen>{
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color:const Color.fromARGB(255, 0, 64, 255),
+          color:Colors.blueAccent
         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                width: 400,
+                width: 200,
                 height: 200,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -58,8 +58,8 @@ class _SplashScreenState extends State<SplashScreen>{
                       text: 'MANDAYA',
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.black, // Color for "AID"
-                        fontFamily: 'LeagueSpartan',
+                        color: Colors.white, // Color for "AID"
+                        fontFamily: 'OpenSans',
                         fontWeight: FontWeight.w900,
                       ),
                     ),
@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen>{
                       style: TextStyle(
                         fontSize: 40,
                         color:  Colors.white, // Color for "ANCHOR"
-                        fontFamily: 'Roboto',
+                        fontFamily: 'OpenSans',
                         fontWeight: FontWeight.w900,
                       ),
                     ),
