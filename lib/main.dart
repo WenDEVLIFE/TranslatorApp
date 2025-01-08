@@ -63,10 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          // Blue background for the upper half
+          // Background image
           Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-           decoration: const BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/map.jpg'),
                 fit: BoxFit.cover,
@@ -90,13 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 10, 1, 1),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                   Navigator.pushNamed(context, '/navigation');
+                    Navigator.pushNamed(context, '/navigation');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
@@ -109,7 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     elevation: 5,
                   ),
-                  child: const Text('Get Started'),
+                  child: const Text('Get Started' ,style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             ),
