@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 10),
                  const Center(
                   child:Text(
-                    'HELLO, WELCOME TO KAMAYO MOBILE TRANSLATOR',
+                    'HELLO, WELCOME TO MADAYA MOBILE TRANSLATOR',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'OpenSans',
