@@ -35,9 +35,9 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo2.png"
-  adaptive_icon_background: "assets/images/logo2.png"
-  adaptive_icon_foreground: "assets/images/logo2.png"
+  image_path: "assets/images/logo2.jpg"
+  adaptive_icon_background: "assets/images/logo2.jpg"
+  adaptive_icon_foreground: "assets/images/logo2.jpg"
   remove_alpha_ios: true
 
 flutter:

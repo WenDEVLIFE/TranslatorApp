@@ -40,13 +40,28 @@ class _SplashScreenState extends State<SplashScreen>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                width: 200,
-                height: 200,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/logo.png'),
-                    fit: BoxFit.cover, // Adjust this to control how the image fits
+              Center(
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: const DecorationImage(
+                      image: AssetImage('assets/images/logo2.jpg'),
+                      fit: BoxFit.fill,
+                    ),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 2,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
                 ),
               ),
