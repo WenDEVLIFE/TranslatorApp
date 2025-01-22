@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 const SizedBox(height: 10),
                 const Text(
-                  'KAMAYO MOBILE TRANSLATOR',
+                  'MINANDAYA MOBILE TRANSLATOR',
                   style: TextStyle(
                     fontSize: 30,
                     fontFamily: 'OpenSans',
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage('assets/images/man.png'),
+                      image: AssetImage('assets/images/mandaya.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 10),
                  const Center(
                   child:Text(
-                    'HELLO, WELCOME TO MADAYA MOBILE TRANSLATOR',
+                    'MADAYAW! ADI KAW KAY KANATON NGINI',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: 'OpenSans',
