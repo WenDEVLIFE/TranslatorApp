@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>{
                 text: const TextSpan(
                   children: [
                     TextSpan(
-                      text: 'MANDAYA',
+                      text: 'MINANDAYA ',
                       style: TextStyle(
                         fontSize: 40,
                         color: Colors.white, // Color for "AID"
@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>{
                       ),
                     ),
                     const TextSpan(
-                      text: ' ',
+                      text: 'MOBILE ',
                       style: TextStyle(
                         fontSize: 40,
                         color: Colors.white, // Color for "FOR"
