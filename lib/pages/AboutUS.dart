@@ -107,7 +107,7 @@ class aboutState extends State<AboutPage> {
                           text: 'Minandaya Translator\n\n',
                         ),
                         TextSpan(
-                          text: '. With this application,you may translate from Mandaya to English and vice versa.The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture.\n\n',
+                          text: 'With this application,you may translate from Mandaya to English and vice versa.The software will promote unity among users while also aiding in the preservation of the Mandaya language and culture.\n\n',
                         ),
                         //TextSpan(
                         // text: 'To guarantee correctness,the application entails gathering and evaluating language data with native speakers. Speech recognition, offline capabilities, and real-time text and voice translation will all be included in the program.\n\n',
