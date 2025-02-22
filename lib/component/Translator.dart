@@ -18,32 +18,37 @@ class Translator {
   }
 
   Future<String> translateText(String inputText, String sourceLanguage, String targetLanguage) async {
-    loadTranslationsFromSQLite();
-    if (sourceLanguage == 'English' && targetLanguage == 'Mandaya') {
-      // Split the input text into words
-      List<String> words = inputText.toLowerCase().split(' ');
+  await loadTranslationsFromSQLite(); // Ensure data is loaded before translation
 
-      // Translate each word
-      List<String> translatedWords = words.map((word) {
-        return _translations.containsKey(word) ? _translations[word]! : word;
-      }).toList();
+  Map<String, String> dictionary = (sourceLanguage == 'English' && targetLanguage == 'Mandaya') 
+      ? _translations 
+      : (sourceLanguage == 'Mandaya' && targetLanguage == 'English') 
+        ? _reverseTranslations 
+        : {};
 
-      // Return the translated text
-      return translatedWords.join(' ');
-    } else if (sourceLanguage == 'Mandaya' && targetLanguage == 'English') {
-      List<String> words = inputText.toLowerCase().split(' ');
-
-      List<String> translatedWords = words.map((word) {
-        return _reverseTranslations.containsKey(word) ? _reverseTranslations[word]! : word;
-      }).toList();
-
-      return translatedWords.join(' ');
-    } else {
-      return 'Unsupported translation';
-    }
-
-
+  if (dictionary.isEmpty) {
+    return 'Unsupported translation';
   }
+
+  String translatedText = inputText.toLowerCase(); 
+
+  // First, check if there are phrase translations
+  dictionary.keys
+      .where((key) => key.contains(' ')) // Only look for phrases first
+      .forEach((phrase) {
+        if (translatedText.contains(phrase)) {
+          translatedText = translatedText.replaceAll(phrase, dictionary[phrase]!);
+        }
+      });
+
+  // Then, translate remaining words
+  translatedText = translatedText
+      .split(' ')
+      .map((word) => dictionary.containsKey(word) ? dictionary[word]! : word)
+      .join(' ');
+
+  return translatedText;
+}
 
   Future <void> RetrieveFromFirebase () async{
 
